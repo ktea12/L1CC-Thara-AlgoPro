@@ -35,3 +35,8 @@ print(f'Total: {formatted_total}')
 #Area of Hexagon
 side = eval(input("Enter the side length of the hexagon:"))
 
+import math
+area = (3 * math.sqrt(3)/2) * pow(side,2)
+formatted_area = "{:.3f}".format(area)
+
+print(f'The area of a hexagon with side length {side} is {formatted_area}')
