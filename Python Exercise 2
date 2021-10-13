@@ -1,1 +1,29 @@
+#Ramp Angle
+mass = eval(input("Enter the mass of the cart (in kg):"))
+force = eval(input("Enter the force to push the cart (in N):"))
+constant = 9.8
 
+import math
+angle = (mass * constant) / force
+math.degrees
+formatted_angle = "{:.1f}".format()
+
+print(f'The angle of the ramp is {formatted_angle} degrees')
+
+#Perimeter of a Triangle
+edge1 = eval(input("Enter length of edge 1:"))
+edge2 = eval(input("Enter length of edge 2:"))
+edge3 = eval(input("Enter length of edge 3:"))
+
+if(edge1 + edge2 > edge3 and edge3 + edge2 > edge1 and edge1 + edge3 > edge2):
+    print(f'The perimeter is {edge1 + edge2 + edge3}')
+
+else: print('Perimeter cannot be calculated due to invalid input.')
+
+#Wind-Chill Temperature
+temp = eval(input("Enter the temperature in Fahrenheit:"))
+
+if(-58 < temp > 41): 
+   while(eval(input("Enter the wind speed in miles per hour:"))):
+
+#Software Sales
