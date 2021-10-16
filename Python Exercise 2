@@ -4,9 +4,9 @@ force = eval(input("Enter the force to push the cart (in N):"))
 constant = 9.8
 
 import math
-angle = (mass * constant) / force
-math.degrees
-formatted_angle = "{:.1f}".format()
+angle = (mass*constant) / force
+math.asin (angle)
+formatted_angle = "{:.1f}".format(angle)
 
 print(f'The angle of the ramp is {formatted_angle} degrees')
 
@@ -22,8 +22,39 @@ else: print('Perimeter cannot be calculated due to invalid input.')
 
 #Wind-Chill Temperature
 temp = eval(input("Enter the temperature in Fahrenheit:"))
+while -58 < temp > 41:
+    print ('Temperature must be between -58F and 41F')
+    temp = eval(input("Please re-enter the temperature in Fahrenheit:"))
 
-if(-58 < temp > 41): 
-   while(eval(input("Enter the wind speed in miles per hour:"))):
+speed = eval(input("Enter the wind speed in miles per hour:"))
+while speed >= 2:
+    print ('Speed must be greater than or equal to 2')
+    speed = eval(input("Please re-enter the wind speed in mules per hour:"))
+
+import math   
+windchill = float(35.74 + 0.6215*temp - 35.75*pow(speed,0.16) + 0.4275*temp*pow(speed,0.16))
+formatted_windchill = "{:.3f}".format(windchill)
+
+print(f'The wind chill index is {formatted_windchill}')
 
 #Software Sales
+pack = eval(input("Enter the number of packages purchased:"))
+packprice = 99*pack
+
+if pack<10:
+    disc = 0
+elif 10 <= pack >= 19:
+    disc = 10
+elif 20 <= pack >= 49:
+    disc = 20
+elif 50 <= pack >= 99:
+    disc = 30
+elif pack >= 100:
+    disc = 40
+    
+discprice = packprice*disc/100
+total = packprice - discprice
+format_discprice = "${:,.2f}".format(discprice)
+format_total = "${:,.2f}".format(total)
+print(f'Discount Amount @ {disc}% : {format_discprice}')
+print(f'Total amount: {format_total}')
