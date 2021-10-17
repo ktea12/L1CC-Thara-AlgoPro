@@ -30,7 +30,7 @@ while -58 < temp > 41:
 speed = eval(input("Enter the wind speed in miles per hour:"))
 while speed >= 2:
     print ('Speed must be greater than or equal to 2')
-    speed = eval(input("Please re-enter the wind speed in mules per hour:"))
+    speed = eval(input("Please re-enter the wind speed in miles per hour:"))
 
 import math   
 windchill = float(35.74 + 0.6215*temp - 35.75*pow(speed,0.16) + 0.4275*temp*pow(speed,0.16))
