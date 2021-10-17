@@ -23,7 +23,7 @@ else: print('Perimeter cannot be calculated due to invalid input.')
 
 #Wind-Chill Temperature
 temp = eval(input("Enter the temperature in Fahrenheit:"))
-while -58 < temp > 41:
+while -58>temp>41:
     print ('Temperature must be between -58F and 41F')
     temp = eval(input("Please re-enter the temperature in Fahrenheit:"))
 
