@@ -5,8 +5,9 @@ constant = 9.8
 
 import math
 angle = (mass*constant) / force
-math.asin (angle)
-formatted_angle = "{:.1f}".format(angle)
+arcsin = math.asin(1/angle)
+degreeangle = math.degrees(arcsin)
+formatted_angle = "{:.1f}".format(degreeangle)
 
 print(f'The angle of the ramp is {formatted_angle} degrees')
 
@@ -40,18 +41,19 @@ print(f'The wind chill index is {formatted_windchill}')
 #Software Sales
 pack = eval(input("Enter the number of packages purchased:"))
 packprice = 99*pack
+disc = 0
 
 if pack<10:
     disc = 0
-elif 10 <= pack >= 19:
+elif pack > 9 and pack<=20:
     disc = 10
-elif 20 <= pack >= 49:
+elif pack > 20 and pack <50:
     disc = 20
-elif 50 <= pack >= 99:
+elif pack > 51 and pack < 100:
     disc = 30
-elif pack >= 100:
+elif pack > 99:
     disc = 40
-    
+
 discprice = packprice*disc/100
 total = packprice - discprice
 format_discprice = "${:,.2f}".format(discprice)
