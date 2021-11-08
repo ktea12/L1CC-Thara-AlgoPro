@@ -8,7 +8,7 @@ tibsfile = "D:/untitled2.py"
 def hapaxes(tibsfile):
     mySnippet = open("D:/untitled2.py")
     wordlist = re.findall(mySnippet.read().lower(), mySnippet.read().strip(".,;"))
-    freqs = {key: 0 for key in wordlist}
+    freqs = {rep: 0 for rep in wordlist}
     
     for word in wordlist:
         freqs[word] += 1
