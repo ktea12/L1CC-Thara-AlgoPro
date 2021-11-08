@@ -13,7 +13,7 @@ def hapaxes(tibsfile):
     for word in wordlist:
         freq[word] += 1
         
-    for word in freqs:
+    for word in freq:
         if freq[word] == 1:
             print(word)
         
