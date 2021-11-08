@@ -6,7 +6,7 @@ import re
 tibsfile = "D:/untitled2.py"
 
 def hapaxes(tibsfile):
-    mySnippet = open("D:/untitled2.py")
+    mySnippet = open("D:/untitled2.py", "r")
     wordlist = re.findall(mySnippet.read().lower(), mySnippet.read().strip(".,;"))
     freq = {rep: 0 for rep in wordlist}
     
