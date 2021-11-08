@@ -7,7 +7,7 @@ tibsfile = "D:/untitled2.py"
 
 def hapaxes(tibsfile):
     mySnippet = open("D:/untitled2.py", "r")
-    regex = '\w+'
+    regex = '\w*'
     wordlist = re.findall(regex, mySnippet.read().lower())
     freq = {rep: 0 for rep in wordlist}
     
