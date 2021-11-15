@@ -22,4 +22,4 @@ for length in word:
     print(f'This text has the average word length of {avgw} letters.')
 
 
-#Setence splitter.
+#Sentence splitter.
