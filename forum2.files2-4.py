@@ -1,16 +1,16 @@
-#Numbering text file.
+#2.Numbering text file.
 
 with open("D:/untitled2.py", "r") as input:
     lines = input.readlines()
     counter = 0
     for line in lines:
-        counter += 1
         if line != '\n':
                 with open("D:/new.untitled2.py", 'a+') as output:
-                    output.write(f'{counter}. {line.replace("/n","")}')
+                    output.write((str)(counter)+'. ' (line.replace("\n","")))
+                    counter += 1
 
 
-#Calculate average word length of text file.
+#3.Calculate average word length of text file.
 
 import re
 
@@ -22,4 +22,10 @@ for length in word:
     print(f'This text has the average word length of {avgw} letters.')
 
 
-#Sentence splitter.
+#4.Sentence splitter.
+
+import re
+miyagi = open("D:/miyagi.py", "r")
+splitter = re.split(r'(?<=[^A-Z].[.?]) +(?=[A-Z])', miyagi)
+for i in splitter:
+    print (i)
