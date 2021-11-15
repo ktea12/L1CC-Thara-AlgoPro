@@ -1,4 +1,4 @@
-#Numbering text file
+#Numbering text file.
 
 with open("D:/untitled2.py", "r") as input:
     lines = input.readlines()
@@ -10,7 +10,7 @@ with open("D:/untitled2.py", "r") as input:
                     output.write(f'{counter}. {line.replace("/n","")}')
 
 
-#Write a program that will calculate the average word length of a text stored in a file.
+#Calculate average word length of text file.
 
 import re
 
@@ -22,8 +22,4 @@ for length in word:
     print(f'This text has the average word length of {avgw} letters.')
 
 
-#
-import nltk
-sentence_data = "Sun rises in the east. Sun sets in the west."
-nltk_tokens = nltk.sent_tokenize(sentence_data)
-print (nltk_tokens)
+#Setence splitter.
