@@ -15,9 +15,7 @@ def shoplistQL():
             foodname = input("Enter the name of the food: ")
             amount = eval(input("Enter the amount of food in pounds: "))
             item = shopitemQL(foodname, amount)
-            if foodname == "" or item.get_price() == 0: #check if the food name is blank and calls .getprice to check if the item is part of the inventory by checking the price
-                print("This item is not within the list of food items.\nYou need to enter a valid name.")
-            elif amount < 0: #check if pounds is less than 0
+            if amount < 0.1: #check if pounds is less than 0
                 print("The amount you're purchasing must be larger than 0 pounds.")
             else:
                 break
