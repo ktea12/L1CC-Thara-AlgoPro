@@ -12,8 +12,8 @@ def shoplistQL():
     
     for i in range(itemnum): #will loop the amount of times accordingly to the user's input on how many items they will order
         while True: #keeps the user to prompt atleast more than 0 pounds and the correct item name
-            foodname = input("Enter the name of the food: ")
-            amount = eval(input("Enter the amount of food in pounds: "))
+            foodname = input("Enter the name of the food: ") #here is to input the name of food
+            amount = eval(input("Enter the amount of food in pounds: ")) #here is to input the pounds using eval which accepts integers and float
             item = shopitemQL(foodname, amount)
             if amount < 0.1: #check if pounds is less than 0
                 print("The amount you're purchasing must be larger than 0 pounds.")
@@ -26,7 +26,7 @@ def shoplistQL():
 def display(itemlist):
     print("Here's a summary of the items that you purchased: ")
     print("-" * 50) #decorative purposes
-    for i in range(len(itemlist)): #prints out the item details within the list
+    for i in range(len(itemlist)): #prints out the item details within the list and item numbers
         print(f"Item #{i + 1}")
         print(itemlist[i].__str__() + "\n")
 
