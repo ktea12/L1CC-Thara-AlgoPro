@@ -9,7 +9,7 @@ class shopitemQL: #create class for shopping items
         self.ptotal = 0 #defaulting total price to 0
     
     def __pricing(self): #private function to give the food items fixed prices
-        if self.foodn.upper() == "DRY CURED IBERIAN HAM":
+        if self.foodn.upper() == "DRY CURED IBERIAN HAM": #turning all the string input to upper case so the program can check whether or not item is in the list and has a fixed price
             self.price = 177.8
         elif self.foodn.upper() == "WAGYU STEAKS":
             self.price = 450
