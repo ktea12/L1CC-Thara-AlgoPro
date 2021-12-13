@@ -47,11 +47,14 @@ class Student(Person):
             
         return self.__courses, self.__grades
     
+    def averageGrade(self):
+        self.__grades ** 2
+        
     def printGrades(self):
-       return self.__grades
+       return self.averageGrade
         
     def __str__(self):
-        return f"Student Name: {self.__name}\nAddress: {self.__address}\nCourse: {self.__courses()}\nGrade: {self.printGrades()}"
+        return f"Student Name: {self.__name}\nAddress: {self.__address}\nCourse: {self.__courses()}\nGrade: {self.averageGrade()}"
 
 print(Student())
 
