@@ -59,6 +59,10 @@ class Student(Person):
 print(Student())
 
 class Teacher(Person):
-    
-    def studentName(Person):
-        print(Person())
+
+    def __init__(self, name, address, numCourses=0, courses[]):
+        super().__init__(name, address)
+        self.__name = name
+        self.__address = address
+        self.__numCourses = numCourses
+        self.__courses = courses
