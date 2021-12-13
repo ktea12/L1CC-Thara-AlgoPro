@@ -65,8 +65,10 @@ class Teacher(Person):
         self.__courses = courses
     
     def addCourse(self):
-    
+        bool(self.__courses)
+        
     def removeCourse(self):
-    
+        bool(self.__courses)
+        
     def __str__(self):
         return f"Teacher Name: {self.__name}\nAddress: {self.__address}\nCourse: {self.__courses()}"
