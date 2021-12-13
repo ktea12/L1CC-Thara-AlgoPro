@@ -33,10 +33,7 @@ class Student(Person):
         self.__numCourses = numCourses
         self.__courses = courses
         self.__grades = grades   
-    
-    def studentName(self):
-        return f"Name: {self.__name}\nAddress: {self.__address}"
-    
+
     def addCourseGrade(self, numCourses, courses, grades):
         self.__numCourses = input("Number of courses: ")
         
@@ -54,7 +51,7 @@ class Student(Person):
        return self.__grades
         
     def __str__(self):
-        return f"Course: {self.__courses()}\nGrade: {self.printGrades()}"
+        return f"Student Name: {self.__name}\nAddress: {self.__address}\nCourse: {self.__courses()}\nGrade: {self.printGrades()}"
 
 print(Student())
 
@@ -66,3 +63,10 @@ class Teacher(Person):
         self.__address = address
         self.__numCourses = numCourses
         self.__courses = courses
+    
+    def addCourse(self):
+    
+    def removeCourse(self):
+    
+    def __str__(self):
+        return f"Teacher Name: {self.__name}\nAddress: {self.__address}\nCourse: {self.__courses()}"
