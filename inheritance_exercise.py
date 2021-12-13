@@ -1,4 +1,4 @@
-#person, student, and teacher class
+#Thara L1CC (2502046944)
 
 class Person:
     def __init__(self, name="Rin", address="Konoha"):
