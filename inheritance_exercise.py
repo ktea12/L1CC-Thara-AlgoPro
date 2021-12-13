@@ -21,21 +21,25 @@ class Person:
         return f"Name: {self.getName()}\nAddress: {self.getAddress()}"
 
 
-Person()
+print(Person())
     
 
 class Student(Person):
     
-    def studentName(Person):
-        print(super.Person)
-    
-    def __init__(self, numCourses= 0, courses=[], grades=[]):
-        numCourses = input("Number of courses: ")
+    def __init__(self, name, address, numCourses= 0, courses=[], grades=[]):
+        super().__init__(name, address)
+        self.__name = name
+        self.__address = address
         self.__numCourses = numCourses
         self.__courses = courses
-        self.__grades = grades
+        self.__grades = grades   
+    
+    def studentName(self):
+        return f"Name: {self.__name}\nAddress: {self.__address}"
     
     def addCourseGrade(self, numCourses, courses, grades):
+        self.__numCourses = input("Number of courses: ")
+        
         self.__courses = courses
         new_course = input("Course name: ")
         self.__courses.append(new_course)
