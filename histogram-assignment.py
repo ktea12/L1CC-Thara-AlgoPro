@@ -1,101 +1,106 @@
 import csv
+import pandas as pd
 import matplotlib.pyplot as plt
-import statistics as stat
-import pygal
-import datetime as dtt
-filename = 'activity.csv'
-with open(filename) as f:
-    reader = csv.reader(f)
-    header_row = next(reader)
-    dict = {}
-    dictInterval = {}
-    dictIntervalWeekEnd = {}
-    dictIntervalWeekDays = {}
-    for row in reader:
-        steps = row[0]
-        if(steps != "NA"):
-            date = row[1]
-            date2 = int(dtt.datetime.strptime(date, '%Y-%m-%d').day)
-            interval = int(row[2])
-            dict.setdefault(str(date), [])
-            dict[str(date)].append(int(steps))
-            dictInterval.setdefault(interval, [])
-            dictInterval[interval].append(int(steps))
-            if(date2 % 7 == 0):
-                dictIntervalWeekEnd.setdefault(interval, [])
-                dictIntervalWeekEnd[interval].append(int(steps))
-            else:
-                dictIntervalWeekDays.setdefault(interval, [])
-                dictIntervalWeekDays[interval].append(int(steps))
- # print(len(dict.keys()))
-    listDate = []
-    listTotal = []
-    listAvg = []
- # listMean = []
- # listMedian = []
-    for i in dict.keys():
-        listDate.append(i)
-        listTotal.append(sum(dict.get(i)))
-        listAvg.append(st.mean(dict.get(i)))
-    plt.hist(listTotal)
-    plt.title("Total Steps per day")
-    plt.xlabel("Steps per day")
-    plt.ylabel("Frequency")
-    plt.yticks(range(0, 25, 5))
-    plt.savefig('figure1-version1.svg')
+import random as rand
+
+df=pd.read_csv('activity.csv')
+print(df.info())
+print(df)
+
+def get_number_of_Nans(df):
+    return df.isnull().sum()
+
+print('NUMBER OF NANS:')
+print(get_number_of_Nans(df))
+
+def fill_in_Nans_with_random_values_and_create_new_dataset():
+    new_dataset =df.copy()
+    new_dataset.fillna(rand.randint(0,100), inplace=True)
+    return new_dataset
+
+print('\n new_dataset \n')
+new_dataset=fill_in_Nans_with_random_values_and_create_new_dataset()
+# df.dropna(inplace=True)
+
+def get_steps_per_day(df):
+    steps_per_day = df.groupby('date').sum()['steps']
+    return steps_per_day.to_frame()
+
+print('steps_per_day')
+print(get_steps_per_day(df))
+
+def histogram_of_total_steps_per_day(df):
+    steps_per_day = get_steps_per_day(df)
+    plt.hist(steps_per_day)
+    plt.xlabel('Total Steps')
+    plt.ylabel('Days')
+    plt.title('Histogram of Total Steps Per Day')
     plt.show()
-    plt.close()
- # plt.show()
-    hist = pygal.Bar()
-    hist.title = "Total steps per day"
-    hist.x_title = "Steps per day"
-    hist.y_title = "Frequency"
-    hist.x_labels = listDate
-    hist.add('Total Number of steps', listTotal)
-    hist.render_to_file('figure1-version2.svg')
-    print("Mean : " + str(st.mean(listTotal)))
-    q = sorted(listTotal)
-    print("Median : " + str(st.median(q)))
- # ------------------------ second case ------------------------
- # What is the average daily activity pattern?
-    listAveragePerInterval = []
-    for i in dictInterval.keys():
-        listAveragePerInterval.append(stat.mean(dictInterval.get(i)))
-    fig = plt.figure(dpi=80, figsize=(20, 6))
-    plt.plot(list(dictInterval.keys()),listAveragePerInterval, c = 'blue')
-    plt.title("Average daily activity")
-    plt.xlabel("Time Interval")
-    plt.ylabel("Average number of steps taken")
-    fig.autofmt_xdate()
-    plt.savefig("figure2.svg")
+
+histogram_of_total_steps_per_day(df)
+
+def get_mean_of_steps_per_day(df):
+    mean_per_day=df.groupby('date').mean()['steps']
+    return mean_per_day.to_frame().dropna()
+
+print('MEAN')
+print(get_mean_of_steps_per_day(df))
+def get_median_of_total_steps_per_day(df):
+    mean_per_day=df.groupby('date').median()['steps']
+    return mean_per_day.to_frame().dropna()
+
+print('MEDIAN')
+print(get_median_of_total_steps_per_day(df))
+
+#time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
+def plot_mean_of_total_steps_per_day():
+    plt.plot(get_mean_of_steps_per_day(df), 'r')
+    plt.xlabel('5-minute Interval')
+    plt.ylabel('Mean Steps Per Day')
+    plt.title('Mean of Total Steps Per Day')
     plt.show()
-    plt.close()
- # print(listAveragePerInterval)
-    maxValue = max(listAveragePerInterval)
-    n = 0
-    max = ""
-    indexMax = listAveragePerInterval.index(maxValue)
-    for i in dictInterval.keys():
-        if(n == indexMax):
-            max = i
-            break
-        n+=1
-    print("maximum number of steps in interval : " + str(max))
-    # print("File saved to figure1-version1.svg and figure1-version2.svg")
-    listWeekDays = []
-    listWeekEnd = []
-    for i in dictIntervalWeekDays.keys():
-        listWeekDays.append(st.mean(dictIntervalWeekDays.get(i)))
-    for i in dictIntervalWeekEnd.keys():
-        listWeekEnd.append(st.mean(dictIntervalWeekEnd.get(i)))
-    fig = plt.figure(dpi=80, figsize=(20, 6))
-    plt.plot(list(dictInterval.keys()),listWeekDays, c = 'blue' , label = 'WeekDays')
-    plt.plot(list(dictInterval.keys()),listWeekEnd, c = 'red' , label = 'WeekEnd')
-    plt.legend(loc = 'upper left')
-    plt.title("All week days and weekend days")
-    plt.xlabel("Time Interval")
-    plt.ylabel("Average number of steps taken")
-    fig.autofmt_xdate()
-    plt.savefig("figure4.svg")
-    plt.show()
-    plt.close()
+
+plot_mean_of_total_steps_per_day()
+
+print('DAY THAT HAS MOST STEPS:')
+def get_date_that_have_max_steps_per_5_minute_interval():
+    steps_per_day = get_steps_per_day(df)
+    return steps_per_day.idxmax()
+
+print(get_date_that_have_max_steps_per_5_minute_interval())
+
+histogram_of_total_steps_per_day(new_dataset)
+print('MEAN OF NEW DATASET')
+print(get_mean_of_steps_per_day(new_dataset))
+print('MEDIAN OF NEW DATASET')
+print(get_median_of_total_steps_per_day(new_dataset))
+
+#classify dates to weekend or weekdays
+df['WEEKDAY'] = pd.to_datetime(df['date']).dt.dayofweek
+weekdays=[]
+weekends=[]
+weekdays_average_steps=[]
+weekends_average_steps=[]
+print(df)
+
+for i in range(len(df)):
+    if df['WEEKDAY'][i]<=5:
+        weekdays.append(df['date'][i])
+        weekdays_average_steps.append(df['steps'][i])
+    else:
+        weekends.append(df['date'][i])
+        weekends_average_steps.append(df['steps'][i])
+print(weekdays)
+print(weekends)
+print(weekdays_average_steps)
+print(weekends_average_steps)
+
+
+# plotting the average steps per day for weekdays and weekends
+plt.figure(figsize=(20,5), dpi=100)
+plt.plot(weekdays, weekdays_average_steps, 'ro')
+plt.plot(weekends, weekends_average_steps, 'bo')
+plt.xlabel('Date')
+plt.ylabel('Average Steps Per Day')
+plt.title('Average Steps Per Day for Weekdays and Weekends')
+plt.show()
