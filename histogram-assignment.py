@@ -21,15 +21,15 @@ def fill(): #fill in NA with random  values and create new dataset
 print('\n new_dataset \n')
 new_dataset=fill() #df.dropna (so that inplace=True)
 
-def get_steps_per_day(df):
+def get_steps_pday(df): #to get steps per day
     steps_per_day = df.groupby('date').sum()['steps']
     return steps_per_day.to_frame()
 
 print('Daily Steps')
-print(get_steps_per_day(df))
+print(get_steps_pday(df))
 
-def histogram_of_total_steps_per_day(df):
-    day_steps = get_steps_per_day(df)
+def histogram_totalstp(df): #histogram for total steps per day
+    day_steps = get_steps_pday(df)
     plt.hist(day_steps)
     plt.xlabel('Total Steps')
     plt.ylabel('Days')
@@ -37,7 +37,7 @@ def histogram_of_total_steps_per_day(df):
     plt.legend()
     plt.show()
 
-histogram_of_total_steps_per_day(df)
+histogram_totalstp(df)
 
 def get_mean_pday(df): #function to get mean of steps per day
     mean_pday=df.groupby('date').mean()['steps']
@@ -53,7 +53,7 @@ print('Median')
 print(get_median_pday(df))
 
 #time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
-def plot_mean_of_total_steps_per_day():
+def plot_mean(): #plotting the means of steps per day
     plt.plot(get_mean_pday(df), 'r')
     plt.xlabel('5-minute Interval')
     plt.ylabel('Mean Steps Per Day')
@@ -61,16 +61,16 @@ def plot_mean_of_total_steps_per_day():
     plt.legend()
     plt.show()
 
-plot_mean_of_total_steps_per_day()
+plot_mean()
 
 print('Day with most steps:')
-def get_date_that_have_max_steps_per_5_minute_interval():
-    steps_per_day = get_steps_per_day(df)
+def get_days_max_5_min(): #to get the dates that have max per 5 minute interval 
+    steps_per_day = get_steps_pday(df)
     return steps_per_day.idxmax()
 
-print(get_date_that_have_max_steps_per_5_minute_interval())
+print(get_days_max_5_min()) 
 
-histogram_of_total_steps_per_day(new_dataset)
+histogram_totalstp(new_dataset)
 print('Mean of New Dataset')
 print(get_mean_pday(new_dataset))
 print('Median of New Dataset')
@@ -78,10 +78,10 @@ print(get_median_pday(new_dataset))
 
 #classify dates to weekend or weekdays
 df['Weekday'] = pan.to_datetime(df['date']).dt.dayofweek
-weekd=[]
-weeknd=[]
+weekd=[] #empty list for weekday steps
+weeknd=[] #empty list for weekend steps
 weekd_avg=[] #empty list for weekday average steps
-weeknd_avg=[]
+weeknd_avg=[] #empty list for weekend average steps
 print(df)
 
 for i in range(len(df)):
