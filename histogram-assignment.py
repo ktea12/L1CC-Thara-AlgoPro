@@ -7,54 +7,54 @@ df=pan.read_csv('activity.csv')
 print(df.info())
 print(df)
 
-def get_number_of_Nans(df):
+def get_NA(df):
     return df.isnull().sum()
 
-print('NUMBER OF NANS:')
-print(get_number_of_Nans(df))
+print('Number of NANS:')
+print(get_NA(df))
 
-def fill_in_Nans_with_random_values_and_create_new_dataset():
+def fill(): #fill in NA with random  values and create new dataset
     new_dataset =df.copy()
     new_dataset.fillna(rand.randint(0,100), inplace=True)
     return new_dataset
 
 print('\n new_dataset \n')
-new_dataset=fill_in_Nans_with_random_values_and_create_new_dataset()
-# df.dropna(inplace=True)
+new_dataset=fill() #df.dropna (so that inplace=True)
 
 def get_steps_per_day(df):
     steps_per_day = df.groupby('date').sum()['steps']
     return steps_per_day.to_frame()
 
-print('steps_per_day')
+print('Daily Steps')
 print(get_steps_per_day(df))
 
 def histogram_of_total_steps_per_day(df):
-    steps_per_day = get_steps_per_day(df)
-    plt.hist(steps_per_day)
+    day_steps = get_steps_per_day(df)
+    plt.hist(day_steps)
     plt.xlabel('Total Steps')
     plt.ylabel('Days')
     plt.title('Histogram of Total Steps Per Day')
+    plt.legend()
     plt.show()
 
 histogram_of_total_steps_per_day(df)
 
-def get_mean_of_steps_per_day(df):
-    mean_per_day=df.groupby('date').mean()['steps']
-    return mean_per_day.to_frame().dropna()
+def get_mean_pday(df): #function to get mean of steps per day
+    mean_pday=df.groupby('date').mean()['steps']
+    return mean_pday.to_frame().dropna()
 
-print('MEAN')
-print(get_mean_of_steps_per_day(df))
-def get_median_of_total_steps_per_day(df):
-    mean_per_day=df.groupby('date').median()['steps']
-    return mean_per_day.to_frame().dropna()
+print('Mean')
+print(get_mean_pday(df))
+def get_median_pday(df):
+    mean_pday=df.groupby('date').median()['steps']
+    return mean_pday.to_frame().dropna()
 
-print('MEDIAN')
-print(get_median_of_total_steps_per_day(df))
+print('Median')
+print(get_median_pday(df))
 
 #time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 def plot_mean_of_total_steps_per_day():
-    plt.plot(get_mean_of_steps_per_day(df), 'r')
+    plt.plot(get_mean_pday(df), 'r')
     plt.xlabel('5-minute Interval')
     plt.ylabel('Mean Steps Per Day')
     plt.title('Mean of Total Steps Per Day')
@@ -72,9 +72,9 @@ print(get_date_that_have_max_steps_per_5_minute_interval())
 
 histogram_of_total_steps_per_day(new_dataset)
 print('MEAN OF NEW DATASET')
-print(get_mean_of_steps_per_day(new_dataset))
+print(get_mean_pday(new_dataset))
 print('MEDIAN OF NEW DATASET')
-print(get_median_of_total_steps_per_day(new_dataset))
+print(get_median_pday(new_dataset))
 
 #classify dates to weekend or weekdays
 df['WEEKDAY'] = pan.to_datetime(df['date']).dt.dayofweek
