@@ -7,13 +7,13 @@ df=pan.read_csv('activity.csv')
 print(df.info())
 print(df)
 
-def get_NA(df):
+def get_NA(df): #getting NA datas so that I can exclude it from the histogram
     return df.isnull().sum()
 
 print('Number of NANS:')
 print(get_NA(df))
 
-def fill(): #fill in NA with random  values and create new dataset
+def fill(): #fill in NA with random values and create new dataset
     new_dataset =df.copy()
     new_dataset.fillna(rand.randint(0,100), inplace=True)
     return new_dataset
