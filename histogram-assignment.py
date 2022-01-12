@@ -63,7 +63,7 @@ def plot_mean_of_total_steps_per_day():
 
 plot_mean_of_total_steps_per_day()
 
-print('DAY THAT HAS MOST STEPS:')
+print('Day with most steps:')
 def get_date_that_have_max_steps_per_5_minute_interval():
     steps_per_day = get_steps_per_day(df)
     return steps_per_day.idxmax()
@@ -71,13 +71,13 @@ def get_date_that_have_max_steps_per_5_minute_interval():
 print(get_date_that_have_max_steps_per_5_minute_interval())
 
 histogram_of_total_steps_per_day(new_dataset)
-print('MEAN OF NEW DATASET')
+print('Mean of New Dataset')
 print(get_mean_pday(new_dataset))
-print('MEDIAN OF NEW DATASET')
+print('Median of New Dataset')
 print(get_median_pday(new_dataset))
 
 #classify dates to weekend or weekdays
-df['WEEKDAY'] = pan.to_datetime(df['date']).dt.dayofweek
+df['Weekday'] = pan.to_datetime(df['date']).dt.dayofweek
 weekd=[]
 weeknd=[]
 weekd_avg=[] #empty list for weekday average steps
@@ -85,7 +85,7 @@ weeknd_avg=[]
 print(df)
 
 for i in range(len(df)):
-    if df['WEEKDAY'][i]<=5:
+    if df['Weekday'][i]<=5:
         weekd.append(df['date'][i])
         weekd_avg.append(df['steps'][i])
     else:
@@ -104,4 +104,5 @@ plt.plot(weeknd, weeknd_avg, 'bo')
 plt.xlabel('Date')
 plt.ylabel('Average Steps Per Day')
 plt.title('Average Steps Per Day for Weekdays and Weekends')
+plt.legend()
 plt.show()
