@@ -1,9 +1,9 @@
 import csv
-import pandas as pd
+import pandas as pan
 import matplotlib.pyplot as plt
 import random as rand
 
-df=pd.read_csv('activity.csv')
+df=pan.read_csv('activity.csv')
 print(df.info())
 print(df)
 
@@ -58,6 +58,7 @@ def plot_mean_of_total_steps_per_day():
     plt.xlabel('5-minute Interval')
     plt.ylabel('Mean Steps Per Day')
     plt.title('Mean of Total Steps Per Day')
+    plt.legend()
     plt.show()
 
 plot_mean_of_total_steps_per_day()
@@ -76,30 +77,30 @@ print('MEDIAN OF NEW DATASET')
 print(get_median_of_total_steps_per_day(new_dataset))
 
 #classify dates to weekend or weekdays
-df['WEEKDAY'] = pd.to_datetime(df['date']).dt.dayofweek
-weekdays=[]
-weekends=[]
-weekdays_average_steps=[]
-weekends_average_steps=[]
+df['WEEKDAY'] = pan.to_datetime(df['date']).dt.dayofweek
+weekd=[]
+weeknd=[]
+weekd_avg=[] #empty list for weekday average steps
+weeknd_avg=[]
 print(df)
 
 for i in range(len(df)):
     if df['WEEKDAY'][i]<=5:
-        weekdays.append(df['date'][i])
-        weekdays_average_steps.append(df['steps'][i])
+        weekd.append(df['date'][i])
+        weekd_avg.append(df['steps'][i])
     else:
-        weekends.append(df['date'][i])
-        weekends_average_steps.append(df['steps'][i])
-print(weekdays)
-print(weekends)
-print(weekdays_average_steps)
-print(weekends_average_steps)
+        weeknd.append(df['date'][i])
+        weeknd.append(df['steps'][i])
+print(weekd)
+print(weeknd)
+print(weekd_avg)
+print(weeknd_avg)
 
 
 # plotting the average steps per day for weekdays and weekends
-plt.figure(figsize=(20,5), dpi=100)
-plt.plot(weekdays, weekdays_average_steps, 'ro')
-plt.plot(weekends, weekends_average_steps, 'bo')
+plt.figure(figsize=(30), dpi=150)
+plt.plot(weekd, weekd_avg, 'ro')
+plt.plot(weeknd, weeknd_avg, 'bo')
 plt.xlabel('Date')
 plt.ylabel('Average Steps Per Day')
 plt.title('Average Steps Per Day for Weekdays and Weekends')
